@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://dwcm3mbqle70a"]
+
+[ext_resource type="Script" path="res://scripts/utils/rhythm_manager.gd" id="1_obifu"]
+
+[node name="RhythmManager" type="Node2D"]
+script = ExtResource("1_obifu")
+audio_bpm = 60
+
+[node name="MainAudioPlayer" type="AudioStreamPlayer" parent="."]
+autoplay = true
+
+[node name="RhythmPlayer" type="AudioStreamPlayer" parent="."]
