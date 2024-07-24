@@ -1,12 +1,24 @@
-[gd_scene load_steps=2 format=3 uid="uid://dwcm3mbqle70a"]
+[gd_scene load_steps=4 format=3 uid="uid://dwcm3mbqle70a"]
 
 [ext_resource type="Script" path="res://scripts/utils/rhythm_manager.gd" id="1_obifu"]
+[ext_resource type="AudioStream" uid="uid://dsjqfc2jgtbol" path="res://sounds/oneshoot/snare.mp3" id="2_osapa"]
+[ext_resource type="AudioStream" uid="uid://co5pdmmw8gb5g" path="res://sounds/oneshoot/drum_loop.wav" id="2_r6dmq"]
 
-[node name="RhythmManager" type="Node2D"]
+[node name="RhythmManager" type="Node2D" node_paths=PackedStringArray("main_audio_player", "rhythm_player", "rhythm_timer")]
 script = ExtResource("1_obifu")
-audio_bpm = 60
+main_audio_player = NodePath("MainAudioPlayer")
+rhythm_player = NodePath("RhythmPlayer")
+audio_bpm = 88
+rhythm_timer = NodePath("RhythmTimer")
 
 [node name="MainAudioPlayer" type="AudioStreamPlayer" parent="."]
-autoplay = true
+stream = ExtResource("2_r6dmq")
+volume_db = -6.718
 
 [node name="RhythmPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_osapa")
+volume_db = 2.34
+
+[node name="RhythmTimer" type="Timer" parent="."]
+
+[connection signal="timeout" from="RhythmTimer" to="." method="_on_rhythm_timer_timeout"]
