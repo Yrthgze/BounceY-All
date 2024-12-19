@@ -8,6 +8,11 @@ var audio_check_freq:float = 0
 var time_since_last_check:float = 0
 const SECS_IN_MIN = 60.0
 
+# Change to enums or something
+var easy = 0.3
+var medium = 0.2
+var hard = 0.1
+
 # Called when any audio bpm change has been made. Not usable for now
 # but maybe in the future we want to change bpms on the go
 func _manage_freq_change():
@@ -27,13 +32,16 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	time_since_last_check += delta
-	print(time_since_last_check)
+	#print(time_since_last_check)
 	if Input.is_action_just_pressed("space"):
 		rhythm_player.play()
 		_check_players_rhythm()
 
 func _check_players_rhythm():
-	if time_since_last_check <= audio_bpm:
+	print(abs(time_since_last_check - audio_check_freq))
+	print(time_since_last_check)
+	print(audio_check_freq)
+	if abs(time_since_last_check - audio_check_freq) <= easy:
 		print("Nice rhythm")
 
 # Called everytime the rhythm has to be checked
