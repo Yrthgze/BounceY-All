@@ -9,9 +9,9 @@ var time_since_last_check:float = 0
 const SECS_IN_MIN = 60.0
 
 # Change to enums or something
-var easy = 0.3
-var medium = 0.2
-var hard = 0.1
+var easy = 0.2
+var medium = 0.1
+var hard = 0.05
 
 # Called when any audio bpm change has been made. Not usable for now
 # but maybe in the future we want to change bpms on the go
@@ -38,11 +38,19 @@ func _process(delta):
 		_check_players_rhythm()
 
 func _check_players_rhythm():
+	var time_to_check = time_since_last_check
 	print(abs(time_since_last_check - audio_check_freq))
 	print(time_since_last_check)
 	print(audio_check_freq)
-	if abs(time_since_last_check - audio_check_freq) <= easy:
-		print("Nice rhythm")
+	if time_to_check > easy:
+		time_to_check = abs(audio_check_freq - time_since_last_check)
+	print(time_to_check)
+	if time_to_check < hard:
+		print("AWESOME rhythm!!!")
+	elif time_to_check < medium:
+		print("Great rhythm!!")
+	elif time_to_check < easy:
+		print("Nice rhythm!")
 
 # Called everytime the rhythm has to be checked
 func _on_rhythm_timer_timeout():
